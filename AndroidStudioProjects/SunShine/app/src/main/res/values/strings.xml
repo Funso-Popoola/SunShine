@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SunShine</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_showMap">Show Map</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_share">Share</string>
+
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="pref_location_title" translate="false">Location</string>
+    <string name="pref_location_key" translate="false">location</string>
+    <string name="pref_location_default_value" translate="false">94043</string>
+    <string name="pref_location_summary" translate = "false">Present Location</string>
+
+
+    <string name="pref_units_title" translate="false">Temperature Units</string>
+    <string name="pref_units_key" translate="false">units</string>
+    <string name="pref_units_default_value" translate="false">metric</string>
+    <string name="pref_units_dialog_title" translate="false">Units</string>
+    <string-array name="pref_units_entries" translate="false">
+        <item>metric</item>
+        <item>imperial</item>
+    </string-array>
+    <string-array name="pref_units_entryValues" translate="false">
+        <item>metric</item>
+        <item>imperial</item>
+    </string-array>
+
+</resources>
