@@ -6,15 +6,21 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 
+import com.hoh.sunshine.sunshine.data.WeatherContract;
+
 public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener{
 
+    private boolean mBindingPreference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_general);
         //setContentView(R.layout.activity_settings);
+
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)));
+
+
     }
 
 
@@ -50,6 +56,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
      */
     private void bindPreferenceSummaryToValue(Preference preference){
         //set listener to watch for preference value changes
+        mBindingPreference = true;
         preference.setOnPreferenceChangeListener(this);
 
         //Trigger the listener with the preference's current values
@@ -57,8 +64,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                                                             preference.getContext())
                                                         .getString(preference.getKey(), ""));
 
+        mBindingPreference = false;
     }
 
+    /*
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
         String stringValue = o.toString();
@@ -77,5 +86,22 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
         return true;
 
+    }
+    */
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object value) {
+        String stringValue = value.toString();
+
+        if(!mBindingPreference){
+            if(preference.getKey().equals(getString(R.string.pref_location_key))){
+                ForecastTask forecastTask = new ForecastTask(getApplicationContext());
+                String location = value.toString();
+                forecastTask.execute(location);
+            }else {
+                getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);
+            }
+        }
+        return false;
     }
 }

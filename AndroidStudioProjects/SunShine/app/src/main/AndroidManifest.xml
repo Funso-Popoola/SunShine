@@ -43,6 +43,10 @@
                 android:value="com.hoh.sunshine.sunshine.MainActivity" />
         </activity>
 
+        <provider
+            android:authorities="com.hoh.sunshine.sunshine"
+            android:name=".data.WeatherProvider" />
+
     </application>
 
 </manifest>
